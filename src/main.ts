@@ -1,23 +1,25 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import { setupCounter } from './counter'
+import { Camera } from "./camera";
+import { Canvas } from "./canvas";
+import "./index.css";
 
-document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="/vite.svg" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
+document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
+  <div class="bg-red-500">
+    <canvas id="cv_main" width="640px" height="480px">
   </div>
-`
+`;
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+const init = async () => {
+  const camera = new Camera();
+  await camera.initializeCamera();
+  if (!camera.available) {
+    window.alert(
+      "カメラへのアクセスがキャンセルされました。処理を中止します。"
+    );
+    return;
+  }
+  const cvMain = document.getElementById("cv_main") as HTMLCanvasElement;
+  if (cvMain == null) return;
+  const canvas = new Canvas(cvMain);
+  camera.canvas = canvas.cvOffscreen;
+};
+window.onload = init;
