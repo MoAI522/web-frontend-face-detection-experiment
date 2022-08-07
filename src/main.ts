@@ -4,7 +4,7 @@ import "./index.css";
 
 document.querySelector<HTMLDivElement>("#app")!.innerHTML = `
   <div class="bg-red-500">
-    <canvas id="cv_main" width="640px" height="480px">
+    <canvas id="cv_main" width="640px" height="480px"></canvas>
   </div>
 `;
 

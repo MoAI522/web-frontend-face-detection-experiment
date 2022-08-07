@@ -38,13 +38,7 @@ export class Camera {
     if (this._canvas == null) return;
     const ctx = this._canvas.getContext("2d");
     if (this._video == null || ctx == null) return;
-    ctx.drawImage(
-      this._video,
-      0,
-      0,
-      this._canvas.clientWidth,
-      this._canvas.clientHeight
-    );
+    ctx.drawImage(this._video, 0, 0, this._canvas.width, this._canvas.height);
   }
 
   private _updateWrapper() {

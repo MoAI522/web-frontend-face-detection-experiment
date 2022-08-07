@@ -11,7 +11,6 @@ export class Canvas {
     this._cvOffscreen = document.createElement("canvas");
     this._cvOffscreen.width = this.width;
     this._cvOffscreen.height = this.height;
-    document.getElementById("app")?.appendChild(this._cvOffscreen);
     window.requestAnimationFrame(() => this._updateWrapper());
   }
 
@@ -25,9 +24,7 @@ export class Canvas {
       this._cvOffscreen.width,
       this._cvOffscreen.height
     );
-    // osCtx.putImageData(frame, 0, 0);
-    mainCtx.putImageData(frame, 0, 0);
-    // mainCtx.drawImage(this._cvOffscreen, 0, 0);
+    mainCtx.putImageData(frame, 0, 0, 0, 0, this.width, this.height);
   }
 
   private _updateWrapper() {
